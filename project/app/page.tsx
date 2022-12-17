@@ -28,6 +28,26 @@ export default function Page(){
         }
     }, [currentSlide])
 
+    const shimmer = (w: number, h: number) => `
+<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`
+
+const toBase64 = (str: string) =>
+  typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)
+
+
     return (
         <div className="mx-auto mt-16" style={{
             maxWidth: '800px'
@@ -44,23 +64,23 @@ export default function Page(){
                 <div className='relative overflow-hidden bg-black h-56 sm:h-72 md:h-96 lg:h-128'>
                     {currentSlide === 0 ? (
                         <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide1" width={800} height={500} className="absolute inset-0 h-full w-full object-cover"/>
+                            <Image src="/images/slider/1.png" alt="slide1" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur'  blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
                         </div>
                     ) : currentSlide === 1 ? (
                         <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide2" width={800} height={500} className="absolute inset-0 h-full w-full object-cover"/>
+                            <Image src="/images/slider/1.png" alt="slide2" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
                         </div>
                     ) : currentSlide === 2 ? (
                         <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide3" width={800} height={500} className="absolute inset-0 h-full w-full object-cover"/>
+                            <Image src="/images/slider/1.png" alt="slide3" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
                         </div>
                     ) : currentSlide === 3 ? (
                         <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide4" width={800} height={500} className="absolute inset-0 h-full w-full object-cover"/>
+                            <Image src="/images/slider/1.png" alt="slide4" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
                         </div>
                     ) : currentSlide === 4 ? (
                         <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide5" width={800} height={500} className="absolute inset-0 h-full w-full object-cover"/>
+                            <Image src="/images/slider/1.png" alt="slide5" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
                         </div>
                     ) : null
                     }
@@ -68,7 +88,7 @@ export default function Page(){
                 <div className='relative z-20 flex justify-center mt-4 sm:mt-8 md:mt-12 lg:mt-16 mb-3' style={
                     {display: 'flex', justifyContent: 'center', position: 'absolute', bottom: '0', width: '100%'}
                 }>
-                  <button className="w-8 h-8 rounded-full bg-green-700 hover:bg-green-600 focus:outline-none focus:shadow-outline-green" onClick={() => prevSlide()} style={
+                  <button aria-label='button-switch-left' className="w-8 h-8 rounded-full bg-green-700 hover:bg-green-600 focus:outline-none focus:shadow-outline-green" onClick={() => prevSlide()} style={
                         currentSlide === 0 ? {display: 'none'} : {display: 'block', marginRight: '0.5rem'}
                   }>
                     <AiFillCaretLeft className="w-5 h-5 text-white" style={{
@@ -76,7 +96,7 @@ export default function Page(){
                         left: '0.3rem'
                     }}/>
               </button>
-                  <button className="ml-4 w-8 h-8 rounded-full bg-green-700 hover:bg-green-600 focus:outline-none focus:shadow-outline-green" onClick={() => nextSlide()} style={
+                  <button aria-label='button-switch-right' className="ml-4 w-8 h-8 rounded-full bg-green-700 hover:bg-green-600 focus:outline-none focus:shadow-outline-green" onClick={() => nextSlide()} style={
                         currentSlide === 4 ? {display: 'none'} : {display: 'block', marginLeft: '0.5rem'}
                   }>
                     <AiFillCaretRight className="w-5 h-5 text-white" style={{
