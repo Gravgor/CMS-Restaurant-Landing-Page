@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const data = await prisma.content.findMany();
         res.status(200).json(data);
     } else if (req.method === 'POST'){
-        if(!req.headers.authorization) return res.status(401).end();
+        if(!req.headers.authorization) return res.status(401).json("Not authorized");
         const dataGet = await prisma.content.findMany();
         const newPhone = req.body.phone.slice(0, 3) + ' ' + req.body.phone.slice(3, 6) + ' ' + req.body.phone.slice(6, 9)
         const data = await prisma.content.update({
