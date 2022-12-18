@@ -8,7 +8,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(200).json(data);
     } else if (req.method === 'POST'){
         if(!req.headers.authorization) return res.status(401).json("Not authorized");
-        if(!req.body.title || !req.body.email || !req.body.phone || !req.body.address || !req.body.address2) return res.status(400).json("Bad request");
         const dataGet = await prisma.content.findMany();
         if(req.body.phone === ''){
             const newPhone = dataGet[0].phone;
