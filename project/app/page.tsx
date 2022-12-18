@@ -8,6 +8,8 @@ export default function Page(){
 
     const [currentSlide, setCurrentSlide] = useState(0)
     const [data, setData] = useState<any[]>([])
+    const [dataPhotos, setDataPhotos] = useState<any[]>([])
+   
 
     const prevSlide = () => {
         setCurrentSlide(currentSlide - 1)
@@ -38,8 +40,10 @@ export default function Page(){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
-            setData(data)
+            data.data2.map((item: any) => {
+              setDataPhotos(prev => [...prev, {photohash: item.photohash}])
+            })
+            setData(data.data)
         })
     },[])
 
@@ -78,28 +82,15 @@ const toBase64 = (str: string) =>
                 margin: '0 auto'
             }}>
                 <div className='relative overflow-hidden bg-black h-56 sm:h-72 md:h-96 lg:h-128'>
-                    {currentSlide === 0 ? (
-                        <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide1" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur'  blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
-                        </div>
-                    ) : currentSlide === 1 ? (
-                        <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide2" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
-                        </div>
-                    ) : currentSlide === 2 ? (
-                        <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide3" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
-                        </div>
-                    ) : currentSlide === 3 ? (
-                        <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide4" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
-                        </div>
-                    ) : currentSlide === 4 ? (
-                        <div className='relative w-full h-full'>
-                            <Image src="/images/slider/1.png" alt="slide5" width={800} height={500} className="absolute inset-0 h-full w-full object-cover" placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`}/>
-                        </div>
-                    ) : null
-                    }
+                    {dataPhotos.map((item, index) => {
+                        return (
+                            <div key={index} className='absolute w-full h-full' style={
+                                currentSlide === index ? {display: 'block'} : {display: 'none'}
+                            }>
+                               <Image src={`${item.photohash}`} width={800} height={500} className="absolute inset-0 h-full w-full object-cover" alt='photo' placeholder='blur' blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(800, 500))}`} />
+                            </div>
+                    )})}
+
                 </div>
                 <div className='relative z-20 flex justify-center mt-4 sm:mt-8 md:mt-12 lg:mt-16 mb-3' style={
                     {display: 'flex', justifyContent: 'center', position: 'absolute', bottom: '0', width: '100%'}
@@ -177,7 +168,6 @@ const toBase64 = (str: string) =>
     <div className="w-1/3 pr-4">
       <h3 className="text-xl font-semibold text-black mb-2">Adres resturacji</h3>
       {data.map((item, index) => {
-        console.log(item)
         return (
             <>
             <p className="text-base text-gray-700 mb-2" key={index}>{item.address}</p>

@@ -1,3 +1,4 @@
+
 export default function Head(){
     <>
         <title>Panel Administratora</title>

@@ -24,4 +24,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const token = jsonwebtoken.sign({ id: user.id }, '3uCPofHOQ3Q7Mt2f2JK3Rz4vlWrCOLMGgOWfn-BjVeovWWPwV1jYxpBqTZE8wfegsjPr_0yWVPEyHKa7KLPkFcxHR0NOE_Bs-YOgBJabG-j8njkKKrfu-GMKyigh_1pptvabyj0OzKKbzpcevP1aOx-b2Ixu4ZwKLpOH8uaWf0', { expiresIn: '1d' });
     res.setHeader('Set-Cookie', `token=${token}; path=/; expires=${new Date(Date.now() + 86400000).toUTCString()}; httponly`);
     res.status(200).json({ token,user });
+    await prisma.$disconnect();
 }
