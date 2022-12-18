@@ -183,13 +183,12 @@ const toBase64 = (str: string) =>
             <p className="text-base text-gray-700 mb-2" key={index}>{item.address}</p>
             <p className="text-base text-gray-700 mb-2" key={index}>{item.address2}</p>
             <p className="text-base text-gray-700 mb-2" key={index}>+48 {item.phone}</p>
-            </>
-        )
-      })}
-      {/* email */}
-        <a href="mailto:szczaw@szczawmirabelki.com" className="text-base text-gray-700 mb-2">
-            szczaw@szczawmirabelki.com
+        <a href={item.email} className="text-base text-gray-700 mb-2">
+            {item.email}
         </a>
+        </>
+        )
+         })}
     </div>
     <div className="w-1/3">
       <h3 className="text-xl font-semibold text-black mb-2">Zobacz nasze pełne menu</h3>
