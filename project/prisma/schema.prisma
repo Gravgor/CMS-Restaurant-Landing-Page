@@ -20,32 +20,13 @@ model User {
 }
 
 
-model MainText {
+model Content {
   id        Int      @default(autoincrement()) @id
-  text      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-
-model Email {
-  id        Int      @default(autoincrement()) @id
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-
-model Phone {
-  id        Int      @default(autoincrement()) @id
-  phone     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Address {
-  id        Int      @default(autoincrement()) @id
-  address   String   @unique
+  title     String
+  email     String
+  address   String
+  address2  String
+  phone     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

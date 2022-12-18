@@ -7,6 +7,7 @@ import {AiFillCaretRight, AiFillCaretLeft} from 'react-icons/ai'
 export default function Page(){
 
     const [currentSlide, setCurrentSlide] = useState(0)
+    const [data, setData] = useState<any[]>([])
 
     const prevSlide = () => {
         setCurrentSlide(currentSlide - 1)
@@ -27,6 +28,21 @@ export default function Page(){
             resetSlide()
         }
     }, [currentSlide])
+
+    useEffect(() => {
+        fetch('api/data', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setData(data)
+        })
+    },[])
+
 
     const shimmer = (w: number, h: number) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -111,7 +127,13 @@ const toBase64 = (str: string) =>
             marginTop: '2rem'
         }}>
         <div className="w-2/3 pr-4">
-          <p className="text-lg font-semibold text-black mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p className="text-lg font-semibold text-black mb-4">
+            {data.map((item, index) => {
+                return (
+                    <p key={index}>{item ? item.title : 'Ładowanie...'}</p>
+                )
+            })}
+          </p>
           </div>
         <div className="w-1/3 pl-4">
              <h3 className="text-xl font-semibold text-black mb-2">Nasze specjalności</h3>
@@ -154,9 +176,16 @@ const toBase64 = (str: string) =>
     </div>
     <div className="w-1/3 pr-4">
       <h3 className="text-xl font-semibold text-black mb-2">Adres resturacji</h3>
-      <p className="text-base text-gray-700 mb-2">ul. Jana Henryka Dąbrowskiego 5</p>
-      <p className="text-base text-gray-700 mb-2">60-838 Poznań</p>
-      <p className="text-base text-gray-700 mb-2">Tel. +48 504 801 401</p>
+      {data.map((item, index) => {
+        console.log(item)
+        return (
+            <>
+            <p className="text-base text-gray-700 mb-2" key={index}>{item.address}</p>
+            <p className="text-base text-gray-700 mb-2" key={index}>{item.address2}</p>
+            <p className="text-base text-gray-700 mb-2" key={index}>+48 {item.phone}</p>
+            </>
+        )
+      })}
       {/* email */}
         <a href="mailto:szczaw@szczawmirabelki.com" className="text-base text-gray-700 mb-2">
             szczaw@szczawmirabelki.com
