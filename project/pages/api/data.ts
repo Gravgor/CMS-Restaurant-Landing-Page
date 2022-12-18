@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 data: {
                     title: req.body.title ? req.body.title : dataGet[0].title,
                     email: req.body.email ? req.body.email : dataGet[0].email,
-                    phone: newPhone ? newPhone : dataGet[0].phone,
+                    phone: dataGet[0].phone,
                     address: req.body.address ? req.body.address : dataGet[0].address,
                     address2: req.body.address2 ? req.body.address2 : dataGet[0].address2,
                 }
@@ -26,6 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             await prisma.$disconnect();
             res.status(200).json(data);
         }else{
+            const newPhone = req.body.phone.slice(0, 3) + ' ' + req.body.phone.slice(3, 6) + ' ' + req.body.phone.slice(6, 9)
             const data = await prisma.content.update({
                 where: {
                     id: 1
@@ -33,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 data: {
                     title: req.body.title ? req.body.title : dataGet[0].title,
                     email: req.body.email ? req.body.email : dataGet[0].email,
-                    phone: req.body.phone ? req.body.phone : dataGet[0].phone,
+                    phone: req.body.phone ? newPhone : dataGet[0].phone,
                     address: req.body.address ? req.body.address : dataGet[0].address,
                     address2: req.body.address2 ? req.body.address2 : dataGet[0].address2,
                 }
