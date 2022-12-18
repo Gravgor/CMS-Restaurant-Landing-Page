@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from './lib/db';
-import path from 'path';
-import fs from 'fs';
-import formidable from "formidable";
+
 
 export const config = {
     api: {
