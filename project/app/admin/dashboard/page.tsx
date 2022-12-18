@@ -52,23 +52,23 @@ export default function Page(){
             </h1>
             <div className="flex flex-col">
                 <label className="block mb-2 font-semibold text-gray-700">
-                    Adres email na głownej stronie
+                    Zmiana email
                 </label>
                 <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="block w-full mb-4 p-2 border border-gray-300 rounded-md" />                
                 <label className="block mb-2 font-semibold text-gray-700">
-                    Tekst o nas na głownej stronie
+                    Zmiana głównego tekstu
                 </label>
                 <textarea value={title} onChange={e => setTitle(e.target.value)} className="block w-full mb-4 p-2 border border-gray-300 rounded-md" />
                 <label className="block mb-2 font-semibold text-gray-700">
-                    Numer telefonu na głownej stronie
+                    Zmiana numeru telefonu
                 </label>
                 <input type="text" value={phone} onChange={e => setPhone(e.target.value)} className="block w-full mb-4 p-2 border border-gray-300 rounded-md" />
                 <label className="block mb-2 font-semibold text-gray-700">
-                    Ulica i numer lokalu na głownej stronie
+                    Zmiana ulicy oraz numeru lokalu
                 </label>
                 <input type="text" value={address} onChange={e => setAddress(e.target.value)} className="block w-full mb-4 p-2 border border-gray-300 rounded-md" />
                 <label className="block mb-2 font-semibold text-gray-700">
-                    Kod pocztowy, miasto na głownej stronie
+                    Zmiana kodu pocztowego oraz miasta
                 </label>
                 <input type="text" value={address2} onChange={e => setAddress2(e.target.value)} className="block w-full mb-4 p-2 border border-gray-300 rounded-md" />
                 <button onClick={handleSubmit} className="mt-4 py-3 px-6 rounded-full bg-green-700 text-white font-semibold hover:bg-green-600 focus:outline-none focus:shadow-outline-green">
