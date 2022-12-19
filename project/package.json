@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@next/font": "13.0.7",
     "@prisma/client": "^4.7.1",
     "@types/react": "18.0.26",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/formidable": "^2.0.5",
+    "@types/google-map-react": "^2.1.7",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/mongodb": "^4.0.7",
     "@types/node": "^18.11.17",

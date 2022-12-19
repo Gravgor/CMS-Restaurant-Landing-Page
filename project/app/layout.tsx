@@ -1,3 +1,4 @@
+import Navbar from './components/Navbar/Navbar'
 import './tailwind/global.css'
 export default function RootLayout({
   children,
@@ -13,7 +14,10 @@ export default function RootLayout({
         <meta name="author" content="Marceli Borowczak" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Navbar/>
+        {children}
+      </body>
     </html>
   )
 }

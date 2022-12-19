@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } else if (req.method === 'POST'){
         if(!req.headers.authorization) return res.status(401).json("Not authorized");
         if(req.body.type === 'email' && req.body.email.includes('@') === false) return res.status(401).json({error: "Email is not valid"});
-        if(req.body.phone.length !== 9) return res.status(401).json({error: "Phone number is not valid"});
+        if(req.body.phone !== '' &&  req.body.phone.length !== 9) return res.status(401).json({error: "Phone number is not valid"});
         const dataGet = await prisma.content.findMany();
         if(req.body.phone === ''){
             const newPhone = dataGet[0].phone;

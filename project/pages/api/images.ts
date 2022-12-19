@@ -13,6 +13,11 @@ export const config = {
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
+    if(req.method === 'GET'){
+        const data = await prisma.sliderPhoto.findMany();
+        res.status(200).json(data);
+        await prisma.$disconnect();
+    }
     if(req.method === 'POST'){
         if(!req.headers.authorization) return res.status(401).json("Not authorized");
         try{
