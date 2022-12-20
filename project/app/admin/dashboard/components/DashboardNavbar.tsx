@@ -8,6 +8,7 @@ export default function DashboardNav(){
     <div className="flex items-center">
       <a className="mr-6 text-gray-700 hover:text-green-500 focus:outline-none focus:shadow-outline" href="/admin/dashboard">Dashboard</a>
       <a className="mr-6 text-gray-700 hover:text-green-500 focus:outline-none focus:shadow-outline" href="/admin/dashboard/menu">Zarządzanie menu</a>
+      <a className="mr-6 text-gray-700 hover:text-green-500 focus:outline-none focus:shadow-outline" href="/admin/dashboard/slider">Zarządzanie sliderem zdjęć</a>
       <a className="text-gray-700 hover:text-red-500 focus:outline-none focus:shadow-outline" href="/logout">Wyloguj się</a>
     </div>
   </div>

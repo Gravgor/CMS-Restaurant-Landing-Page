@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import {AiFillCaretRight, AiFillCaretLeft} from 'react-icons/ai'
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import Navbar from './components/Navbar/Navbar'
 import Loading from './components/Loading/Loading'
 
@@ -31,11 +30,6 @@ export default function Page(){
     const resetSlide = () => {
         setCurrentSlide(0)
     }
-
-
-    const render = (status: Status) => {
-        return <h1>{status}</h1>;
-      };
 
 
     useEffect(() => {
@@ -108,25 +102,25 @@ typeof window === 'undefined'
       <section className="bg-white-500 text-white py-16" style={{
         height: '460px',
       }}>
-      <div className="container mx-auto px-4 flex">
+      <div className="container mx-auto px-4 flex media-container">
         <div className="w-1/2 pr-8">
-          <h1 className="text-5xl font-bold leading-tight mb-4 mt-12 text-green-600">Szczaw i Mirabelki</h1>
+          <h1 className="lg:text-5xl sm:text-xl font-bold leading-tight mb-4 mt-12 text-green-600">Szczaw i Mirabelki</h1>
            {readMore ? data.map((item: any) => {
             return (
-                <p key='1' className="text-xl mb-4 text-gray-400">{item.title} <span className="text-blue-400" onClick={() => readMoreHandler()}>(Schowaj tekst)</span></p>
+                <p key='1' className="lg:text-2xl mb-4 text-gray-400 overflow">{item.title} <span className="text-blue-400" onClick={() => readMoreHandler()}>(Schowaj tekst)</span></p>
             )
            }
               ) : data.map((item: any) => {
             return (
-                item.title.length > 100 ? <p key='2' className="text-xl mb-4 text-gray-400">{item.title.slice(0, 200)}... <span className="text-blue-400" onClick={() => readMoreHandler()}>(Czytaj więcej)</span></p> : <p key='3' className="text-xl mb-4 text-gray-400">{item.title} <span className="text-blue-400" onClick={() => readMoreHandler()}>(Czytaj więcej)</span></p>
+                item.title.length > 100 ? <p key='2' className="lg:text-2xl mb-4 text-gray-400 overflow">{item.title.slice(0, 200)}... <span className="text-blue-400" onClick={() => readMoreHandler()}>(Czytaj więcej)</span></p> : <p key='3' className="lg:text-2xl mb-4 text-gray-400">{item.title} <span className="text-blue-400" onClick={() => readMoreHandler()}>(Czytaj więcej)</span></p>
             ) 
             }
               )}
 
-          <a href="https://szczaw-i-mirabelki.dowozimy.pl/" className="px-4 py-2 rounded-full bg-black focus:outline-none focus:shadow-outline-black text-white mt-6 transition ease-in-out delay-75 bg-green-600 hover:bg-green-800">Zamów teraz</a>
+          <a href="https://szczaw-i-mirabelki.dowozimy.pl/" className="px-4 py-2 rounded-full bg-black focus:outline-none focus:shadow-outline-black text-white mt-6 transition ease-in-out delay-75 bg-green-600 hover:bg-green-800 sm:h-56 sm:w-7">Zamów teraz</a>
         </div>
         <div className="w-1/2">
-            <div className="relative overflow-hidden bg-black rounded-xl shadow-2xl shadow-green-600">
+            <div className="relative overflow-hidden bg-black rounded-xl shadow-2xl shadow-green-600 slider-class">
                 <div className="relative z-10"
                 style={{
                     maxWidth: '100%',
@@ -170,7 +164,7 @@ typeof window === 'undefined'
       </div>
       </div>
     </section>
-    <section className="bg-gray-200 py-12 mt-12">
+    <section className="bg-gray-200 py-12 mt-12 media-container2">
   <div className="container mx-auto px-4">
     <h2 className="text-3xl font-bold mb-8">Menu</h2>
     <div className="flex flex-wrap -mx-4">
@@ -182,7 +176,9 @@ typeof window === 'undefined'
         {mainCourse.map((item: any) => {
           return (
             <div  key={item.id} className="flex items-start mb-4">
-              <div className="w-16 h-16 rounded-full bg-green-500 mr-4 flex items-center justify-center text-white text-xl font-bold">DG</div>
+              {item.image ? <Image src={`${item.image}`} alt='dish' width={110} height={160} className='rounded-full mr-4 flex items-center justify-center text-white text-xl font-bold'/>
+              : <div className="w-16 h-16 rounded-full bg-green-500 mr-4 flex items-center justify-center text-white text-xl font-bold">D</div>
+              }
               <div className="flex-grow">
                 <h3 className="text-lg font-bold mb-2">{item.name}</h3>
                 <p className="text-gray-700 mb-2">{item.ingredients}</p>
@@ -197,11 +193,13 @@ typeof window === 'undefined'
           height: '400px',
           overflowY: 'auto'
         }}>
-      <h3 className="text-lg font-bold mb-4">Przystawki</h3>
+      <h3 className="text-lg font-bold mb-4 ">Przystawki</h3>
         {startes.map((item: any) => {
           return (
             <div key={item.id} className="flex items-start mb-4">
-              <div className="w-16 h-16 rounded-full bg-green-500 mr-4 flex items-center justify-center text-white text-xl font-bold">P</div>
+              {item.image ? <Image src={`${item.image}`} alt='dish' width={110} height={160} className='rounded-full mr-4 flex items-center justify-center text-white text-xl font-bold'/>
+              : <div className="w-16 h-16 rounded-full bg-green-500 mr-4 flex items-center justify-center text-white text-xl font-bold">P</div>
+              }
               <div className="flex-grow">
                 <h3 className="text-lg font-bold mb-2">{item.name}</h3>
                 <p className="text-gray-700 mb-2">{item.ingredients}</p>
@@ -220,7 +218,9 @@ typeof window === 'undefined'
         {desserts.map((item: any) => {
           return (
             <div key={item.id} className="flex items-start mb-4">
-              <div className="w-16 h-16 rounded-full bg-green-500 mr-4 flex items-center justify-center text-white text-xl font-bold">D</div>
+              {item.image ? <Image src={`${item.image}`} alt='dish' width={110} height={160} className='rounded-full mr-4 flex items-center justify-center text-white text-xl font-bold'/>
+              : <div className="w-16 h-16 rounded-full bg-green-500 mr-4 flex items-center justify-center text-white text-xl font-bold">D</div>
+              }
               <div className="flex-grow">
                 <h3 className="text-lg font-bold mb-2">{item.name}</h3>
                 <p className="text-gray-700 mb-2">{item.ingredients}</p>
@@ -234,7 +234,7 @@ typeof window === 'undefined'
         </div>
         </div>
         </section>
-<footer className="bg-green-500 py-8 text-white">
+<footer className="bg-green-500 py-8 text-white media-footer">
   <div className="container mx-auto px-4">
     <div className="flex flex-wrap -mx-4">
       <div className="w-full md:w-1/3 px-4 mb-8">

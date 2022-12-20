@@ -7,3 +7,52 @@
     background-color: #00c06b;
     border-radius: 10px;
   }
+
+
+
+
+  @media screen and (max-width: 1024px) {
+    .overflow{
+      overflow-y: auto;
+      height: 200px;
+      position: relative;
+      top: -15px;
+    }
+    .slider-class{
+      position: relative;
+      top: 65px;
+    }
+    .button-group{
+      position: relative;
+      top: 20px;
+      left: -50px;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      gap: 10px;
+    }
+    .navbar{
+      height: 10px!important;
+      width: 100%!important;
+    }
+    .media-container{
+      position: relative;
+      top: -60px;
+    }
+    .menu-media{
+      position: relative;
+      top: -160px;
+    }
+    .media-container2{
+      position: relative;
+      top: -160px;
+      height: fit-content;
+    }
+    .brak-media{
+      display: none;
+    }
+    .media-footer{
+      position: relative;
+      top: -160px;
+    }
+  }

@@ -18,6 +18,13 @@ export default function Page(){
     const [loading, setLoading] = useState(true)
 
 
+    const [image, setImage] = useState('')
+    const [refreshToken, setRefreshToken] = useState(Math.random())
+
+
+    /// 
+    const [menuLoading, setMenuLoading] = useState(false)
+
     useEffect(() => {
         const token = localStorage.getItem('token')
         if(token === null){
@@ -36,12 +43,28 @@ export default function Page(){
         fetchData()
     }, [])
 
+
+    //// real time update
+
+    useEffect(() => {
+        fetch('/api/menu', {
+            method: 'GET',
+        },
+        ).then(res => res.json())
+        .then(data => {
+            setMenu(data)
+            setMenuLoading(false)
+            setTimeout(() => setRefreshToken(Math.random()), 3000)
+        })
+    }, [refreshToken])
+
     const addDish = async () => {
         const data = {
             category,
             name,
             price,
-            ingredients
+            ingredients,
+            image
         }
         fetch('/api/menu', {
             method: 'POST',
@@ -62,6 +85,7 @@ export default function Page(){
             } else {
                 setSuccess(data.success)
                 setSuccessBool(true)
+                setMenuLoading(true)
                 setTimeout(() => {
                     setSuccess('')
                     setSuccessBool(false)
@@ -93,6 +117,7 @@ export default function Page(){
             } else {
                 setSuccess(data.success)
                 setSuccessBool(true)
+                setMenuLoading(true)
                 setTimeout(() => {
                     setSuccess('')
                     setSuccessBool(false)
@@ -100,6 +125,11 @@ export default function Page(){
             }
         }
         )
+    }
+
+    const editDish = async (id: string) => {
+        /// 
+        console.log('edit')
     }
 
 
@@ -135,6 +165,20 @@ export default function Page(){
             (e) => setPrice(e.target.value)
         }/>
     </div>
+    <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-2">Zdjęcie</label>
+        <input className="block w-full bg-white border-2 border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:border-green-500" type="file" id="photo" onChange={(e) => {
+                    if(!e.target.files) return
+                    if(e.target.files.length === 0) return
+                    const file = e.target.files[0]
+                    const reader = new FileReader()
+                    reader.readAsDataURL(file)
+                    reader.onloadend = () => {
+                        alert('Możesz teraz zapisać zmiany')
+                        setImage(reader.result as string)
+                    }
+        }}/>
+    </div>
     <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="add-button" onClick={
        (e) => addDish()
     }>Dodaj</button>
@@ -154,8 +198,9 @@ export default function Page(){
             <th className="px-4 py-2">Akcje</th>
             </tr>
         </thead>
+        {menuLoading && <Loading/>}
         <tbody>
-        {menu.length > 0 && menu.map((dish, index) => {
+        {menu.length > 0 && menuLoading === false && menu.map((dish, index) => {
             return (
                 <tr key={index}>
                     <td className="border px-4 py-2">{dish.id}</td>
@@ -163,7 +208,8 @@ export default function Page(){
                     <td className="border px-4 py-2">{dish.category}</td>
                     <td className="border px-4 py-2">{dish.price}</td>
                     <td className="border px-4 py-2">
-                        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="add-button" onClick={() => deleteDish(dish.id)}>Usuń</button>
+                        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-5" type="button" id="add-button" onClick={() => deleteDish(dish.id)}>Usuń</button>
+                        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="add-button" onClick={() => editDish(dish.id)}>Edytuj</button>
                     </td>
                 </tr>
             )
