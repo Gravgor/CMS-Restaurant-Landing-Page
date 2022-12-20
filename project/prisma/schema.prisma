@@ -33,9 +33,21 @@ model Content {
 
 model SliderPhoto {
   id               Int      @id @default(autoincrement())
+  name            String
   photohash        String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
   Content          Content? @relation(fields: [contentContentID], references: [contentID])
   contentContentID Int?
+}
+
+
+model Food{
+  id        Int      @id @default(autoincrement())
+  name      String
+  ingredients String
+  price     String
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

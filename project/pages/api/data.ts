@@ -6,7 +6,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if(req.method === 'GET'){
         const data = await prisma.content.findMany();
         const data2 = await prisma.sliderPhoto.findMany();
-        res.status(200).json({data, data2});
+        const data3 = await prisma.food.findMany();
+        res.status(200).json({data, data2,data3});
         await prisma.$disconnect();
     } else if (req.method === 'POST'){
         if(!req.headers.authorization) return res.status(401).json("Not authorized");

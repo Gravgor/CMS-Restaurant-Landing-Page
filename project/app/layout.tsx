@@ -1,12 +1,12 @@
-import Navbar from './components/Navbar/Navbar'
 import './tailwind/global.css'
+import './assets/index.css'
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html lang='pl'>
       <head>
         <title>Szczaw i Mirabelki</title>
         <meta name="description" content="Restauracja z kuchnią wegańską" />
@@ -15,9 +15,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
-        <Navbar/>
         {children}
       </body>
     </html>
   )
 }
+
+
+

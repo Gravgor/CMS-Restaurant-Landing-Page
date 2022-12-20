@@ -1,14 +1,9 @@
 
 
-export default function AdmintLayout({children}: {children: React.ReactNode}) {
+export default function AdminLayout({children}: {children: React.ReactNode}) {
   return (
-    <html>
-      <head>
-        <title>Admin Panel</title>
-      </head>
-      <body>
-        {children}
-      </body>
-    </html>
+    <section>
+      {children}
+    </section>
   )
 }
