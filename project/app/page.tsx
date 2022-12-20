@@ -56,7 +56,6 @@ export default function Page(){
               setLoading(false)
             })
             setData(data.data)
-            console.log(data.data3)
             setMainCourse(data.data3.filter((item: any) => item.category === 'Danie główne'))
             setStartes(data.data3.filter((item: any) => item.category === 'Przystawka'))
             setDesserts(data.data3.filter((item: any) => item.category === 'Deser'))
@@ -67,9 +66,6 @@ export default function Page(){
         setReadMore(!readMore)
     }
 
-    useEffect(() => {
-      console.log(maxSlide)
-    },[maxSlide])
 
 
     const shimmer = (w: number, h: number) => `
