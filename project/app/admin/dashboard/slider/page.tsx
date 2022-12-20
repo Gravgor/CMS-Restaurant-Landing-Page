@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react'
+import Loading from "../../../components/Loading/Loading";
 
 export default function Page(){
 
@@ -128,6 +129,7 @@ export default function Page(){
 
 
     return (
+        loading ? <Loading/> :
         <div className="mx-auto mt-16" style={{
             maxWidth: '800px'
         }}>

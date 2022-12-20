@@ -6,7 +6,7 @@ import Loading from "../../components/Loading/Loading";
 
 export default function Page(){
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const [email, setEmail] = useState('')
     const [title, setTitle] = useState('')
@@ -20,6 +20,16 @@ export default function Page(){
     const [errorText, setErrorText] = useState('')
    
 
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if(token === null){
+            window.location.href = '/admin'
+        }
+        setTimeout(() => {
+            setLoading(false)
+        },3000)
+    }, [])
 
 
     const handleSubmit = (e: any) => {
