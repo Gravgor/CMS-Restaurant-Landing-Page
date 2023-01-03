@@ -7,10 +7,7 @@ A content management system (CMS) for a restaurant landing page, built using Typ
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
-- [Testing](#testing)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## Installation
 
