@@ -14,7 +14,7 @@ A content management system (CMS) for a restaurant landing page, built using Typ
 
 ## Installation
 
-1. Clone this repository: git clone https://github.com/[your_username]/CMS-Restaurant-Landing-Page.git
+1. Clone this repository: git clone https://github.com/Gravgor/CMS-Restaurant-Landing-Page.git
 
 2. Navigate to the project directory: cd CMS-Restaurant-Landing-Page
 
