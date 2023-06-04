@@ -26,7 +26,7 @@ export default function Page () {
                 window.location.href = '/admin/dashboard'
             }
         }
-        handleFetch()
+        //handleFetch()
     }
 
     return (

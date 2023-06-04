@@ -20,6 +20,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/head.js", "pages/api/register.ts.dev"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/head.js", "pages/api/register.ts"],
   "exclude": ["node_modules"]
 }

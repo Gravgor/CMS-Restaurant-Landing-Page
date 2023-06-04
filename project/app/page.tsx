@@ -59,6 +59,9 @@ export default function Page(){
             setMainCourse(data.data3.filter((item: any) => item.category === 'Danie główne'))
             setStartes(data.data3.filter((item: any) => item.category === 'Przystawka'))
             setDesserts(data.data3.filter((item: any) => item.category === 'Deser'))
+            if(length === 0){
+              setLoading(false)
+            }
         })
     },[])
 

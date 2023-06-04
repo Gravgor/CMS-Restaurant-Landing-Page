@@ -6,7 +6,7 @@ import Loading from "../../components/Loading/Loading";
 
 export default function Page(){
 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     const [email, setEmail] = useState('')
     const [title, setTitle] = useState('')
@@ -21,6 +21,7 @@ export default function Page(){
    
 
 
+    /*
     useEffect(() => {
         const token = localStorage.getItem('token')
         if(token === null){
@@ -30,6 +31,7 @@ export default function Page(){
             setLoading(false)
         },3000)
     }, [])
+    */
 
 
     const handleSubmit = (e: any) => {
